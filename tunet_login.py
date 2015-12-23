@@ -29,7 +29,8 @@ def login(username, password):
 
 
 def main():
-    filename = 'configure.json'
+    dir = path.dirname(__file__)
+    filename = path.join(dir, 'configure.json')
     if (path.isfile(filename)):
         with open(filename, 'r') as f:
             data = json.load(f)
@@ -40,7 +41,7 @@ def main():
         password = input('password: ')
         autosave = input('save?(y/n): ')
         if (autosave == 'y'):
-            with open(filename, 'w') as f:
+            with open(filename, 'w+') as f:
                 json.dump({ 'username': username, 'password': password }, f)
 
     login(username, password)
