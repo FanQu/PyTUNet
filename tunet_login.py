@@ -3,6 +3,7 @@ from binascii import hexlify
 import json
 import requests
 import sys
+import time
 from os import path
 
 
@@ -35,25 +36,27 @@ def logout():
 
 
 def main():
-    if len(sys.argv) == 1:
-        dir = path.dirname(__file__)
-        filename = path.join(dir, 'configure.json')
-        if (path.isfile(filename)):
-            with open(filename, 'r') as f:
-                data = json.load(f)
-                username = data['username']
-                password = data['password']
-        else:
-            username = input('username: ')
-            password = input('password: ')
-            autosave = input('save?(y/n): ')
-            if (autosave == 'y'):
-                with open(filename, 'w+') as f:
-                    json.dump({ 'username': username, 'password': password }, f)
+    while 1:
+        time.sleep(10):
+        if len(sys.argv) == 1:
+            dir = path.dirname(__file__)
+            filename = path.join(dir, 'configure.json')
+            if (path.isfile(filename)):
+                with open(filename, 'r') as f:
+                    data = json.load(f)
+                    username = data['username']
+                    password = data['password']
+            else:
+                username = input('username: ')
+                password = input('password: ')
+                autosave = input('save?(y/n): ')
+                if (autosave == 'y'):
+                    with open(filename, 'w+') as f:
+                        json.dump({ 'username': username, 'password': password }, f)
 
-        login(username, password)
-    elif sys.argv[1] == 'logout':
-        logout()
+            login(username, password)
+        elif sys.argv[1] == 'logout':
+            logout()
 
 if __name__ == '__main__':
     main()
