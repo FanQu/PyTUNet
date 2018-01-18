@@ -37,7 +37,7 @@ def logout():
 
 def main():
     while 1:
-        time.sleep(10):
+        time.sleep(10)
         if len(sys.argv) == 1:
             dir = path.dirname(__file__)
             filename = path.join(dir, 'configure.json')
